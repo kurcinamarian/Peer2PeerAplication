@@ -302,7 +302,7 @@ def check_msg_delivery(remaining_tries):
 #sending text parameters
 def send_message_parameters():
     global sending, delivered, requested
-    message = message_entry.get()
+    message = message_entry.get().encode('utf-8')
     last_fragment = len(message) // max_fragment_size
     #window size should be less than half of fragment number
     if last_fragment / 2 >= 65535:
@@ -1094,8 +1094,8 @@ def hide_settings_canvas():
         corruption_rate = float(corruption_rate)
         if not 0 <= corruption_rate <= 50:
             right = False
-        #maximum is 1459 so total msg is no longer than 1500
-        if not 1 <= max_fragment_size <= 1459:
+        #maximum is 1449 so total msg is no longer than 1500
+        if not 1 <= max_fragment_size <= 1449:
             right = False
         if not os.path.isdir(download_address):
             right = False
@@ -1162,7 +1162,7 @@ def setup_gui():
     download_entry.insert(0, "C:\\Users\\maria\\OneDrive\\Desktop\\ZS-2024\\PKS\\Kontrolny bod")
     download_entry.place(x=22, y=41)
     #fragment size
-    fragment_label = tk.Label(settings_canvas, text="Enter fragment size(1-1459B)")
+    fragment_label = tk.Label(settings_canvas, text="Enter fragment size(1-1449B)")
     fragment_label.place(x=20, y=70)
     fragment_entry = tk.Entry(settings_canvas, width=50)
     fragment_entry.insert(0, "1")
